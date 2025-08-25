@@ -1,5 +1,4 @@
 import 'cart_item.dart';
-import 'user.dart';
 
 enum OrderStatus {
   pending,

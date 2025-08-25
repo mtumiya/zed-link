@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../main.dart';
 import 'role_selection_screen.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
@@ -31,14 +32,23 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
       final success = await authProvider.verifyOTP(_otpController.text);
       
       if (success && mounted) {
-        // Navigate to role selection screen
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => RoleSelectionScreen(
-              phoneNumber: widget.phoneNumber,
+        // Check if user is already authenticated (admin case)
+        if (authProvider.isAuthenticated) {
+          // Admin user - navigate back to main app (will show admin dashboard)
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const AuthWrapper()),
+            (route) => false,
+          );
+        } else {
+          // Regular user - navigate to role selection screen
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => RoleSelectionScreen(
+                phoneNumber: widget.phoneNumber,
+              ),
             ),
-          ),
-        );
+          );
+        }
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

@@ -5,7 +5,6 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:zed_link/main.dart';
@@ -17,7 +16,7 @@ void main() {
 
     // Verify that login screen is shown
     expect(find.text('Zed Link'), findsOneWidget);
-    expect(find.text('Lusaka Order & Courier Platform'), findsOneWidget);
-    expect(find.text('Send OTP'), findsOneWidget);
+    expect(find.text('Your trusted marketplace and delivery platform'), findsOneWidget);
+    expect(find.text('Send Verification Code'), findsOneWidget);
   });
 }

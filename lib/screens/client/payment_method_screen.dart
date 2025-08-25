@@ -140,7 +140,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: Text(
-                  'Continue with ${_selectedMethod != null ? PaymentMethod_Info.getMethodInfo(_selectedMethod!).name : "Payment"}',
+                  'Continue with ${_selectedMethod != null ? PaymentMethodInfo.getMethodInfo(_selectedMethod!).name : "Payment"}',
                   style: const TextStyle(fontSize: 16),
                 ),
               ),
@@ -172,7 +172,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   }
 
   Widget _buildPaymentOption(PaymentMethod method) {
-    final methodInfo = PaymentMethod_Info.getMethodInfo(method);
+    final methodInfo = PaymentMethodInfo.getMethodInfo(method);
     final isSelected = _selectedMethod == method;
     
     return Card(

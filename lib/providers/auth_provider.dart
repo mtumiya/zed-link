@@ -74,8 +74,16 @@ class AuthProvider with ChangeNotifier {
     final isValidOTP = otp == _sentOTP || otp.length == 6;
     
     if (isValidOTP) {
-      // Don't create user yet - wait for role selection
-      // Just mark OTP as verified
+      // Check if this is an admin phone number
+      if (_isAdminPhoneNumber(_pendingPhoneNumber!)) {
+        // Create admin user directly without registration
+        await _createAdminUser(_pendingPhoneNumber!);
+        _isLoading = false;
+        notifyListeners();
+        return true;
+      }
+      
+      // For regular users, don't create user yet - wait for role selection
       _isLoading = false;
       notifyListeners();
       return true;
@@ -128,5 +136,38 @@ class AuthProvider with ChangeNotifier {
     _pendingPhoneNumber = null;
     _sentOTP = null;
     notifyListeners();
+  }
+  
+  // Check if phone number belongs to an admin
+  bool _isAdminPhoneNumber(String phoneNumber) {
+    // List of admin phone numbers (you can modify this list)
+    final adminNumbers = [
+      '+260971234567', // Example admin number
+      '+260987654321', // Another example admin number
+    ];
+    
+    return adminNumbers.contains(phoneNumber);
+  }
+  
+  // Create admin user directly
+  Future<void> _createAdminUser(String phoneNumber) async {
+    _currentUser = app_user.User(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      phoneNumber: phoneNumber,
+      name: 'Administrator',
+      role: app_user.UserRole.admin,
+      isVerified: true,
+      createdAt: DateTime.now(),
+    );
+    
+    // Store admin user data
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_id', _currentUser!.id);
+    await prefs.setString('phone_number', _currentUser!.phoneNumber);
+    await prefs.setString('user_name', _currentUser!.name);
+    await prefs.setString('user_role', _currentUser!.role.toString());
+    
+    _pendingPhoneNumber = null;
+    _sentOTP = null;
   }
 }

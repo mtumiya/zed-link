@@ -137,7 +137,7 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
                         ),
                         const SizedBox(height: 12),
                         _buildDetailRow('Amount', payment.formattedAmount),
-                        _buildDetailRow('Method', PaymentMethod_Info.getMethodInfo(payment.method).name),
+                        _buildDetailRow('Method', PaymentMethodInfo.getMethodInfo(payment.method).name),
                         if (payment.phoneNumber != null)
                           _buildDetailRow('Phone', payment.phoneNumber!),
                         _buildDetailRow('Order ID', payment.orderId),

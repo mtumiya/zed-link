@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../models/rating.dart';
-import '../models/order.dart';
-import '../models/delivery.dart';
 
 class RatingProvider with ChangeNotifier {
   List<Rating> _ratings = [];

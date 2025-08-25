@@ -61,9 +61,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
           padding: const EdgeInsets.all(24.0),
           child: Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                 const Icon(
                   Icons.person_add,
                   size: 64,
@@ -136,7 +137,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                   Icons.delivery_dining,
                 ),
                 
-                const Spacer(),
+                const SizedBox(height: 32),
                 
                 // Complete registration button
                 Consumer<AuthProvider>(
@@ -158,6 +159,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                   },
                 ),
               ],
+              ),
             ),
           ),
         ),

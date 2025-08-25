@@ -17,14 +17,14 @@ enum PaymentStatus {
   refunded
 }
 
-class PaymentMethod_Info {
+class PaymentMethodInfo {
   final PaymentMethod method;
   final String name;
   final String description;
   final String icon;
   final bool isAvailable;
 
-  const PaymentMethod_Info({
+  const PaymentMethodInfo({
     required this.method,
     required this.name,
     required this.description,
@@ -32,44 +32,44 @@ class PaymentMethod_Info {
     this.isAvailable = true,
   });
 
-  static const List<PaymentMethod_Info> availableMethods = [
-    PaymentMethod_Info(
+  static const List<PaymentMethodInfo> availableMethods = [
+    PaymentMethodInfo(
       method: PaymentMethod.mtn,
       name: 'MTN Mobile Money',
       description: 'Pay with MTN MoMo',
       icon: '📱',
     ),
-    PaymentMethod_Info(
+    PaymentMethodInfo(
       method: PaymentMethod.airtel,
       name: 'Airtel Money',
       description: 'Pay with Airtel Money',
       icon: '📲',
     ),
-    PaymentMethod_Info(
+    PaymentMethodInfo(
       method: PaymentMethod.zamtel,
       name: 'Zamtel Kwacha',
       description: 'Pay with Zamtel Kwacha',
       icon: '💳',
     ),
-    PaymentMethod_Info(
+    PaymentMethodInfo(
       method: PaymentMethod.visa,
       name: 'Visa Card',
       description: 'Pay with Visa credit/debit card',
       icon: '💳',
     ),
-    PaymentMethod_Info(
+    PaymentMethodInfo(
       method: PaymentMethod.mastercard,
       name: 'Mastercard',
       description: 'Pay with Mastercard credit/debit card',
       icon: '💳',
     ),
-    PaymentMethod_Info(
+    PaymentMethodInfo(
       method: PaymentMethod.bankTransfer,
       name: 'Bank Transfer',
       description: 'Direct bank account transfer',
       icon: '🏦',
     ),
-    PaymentMethod_Info(
+    PaymentMethodInfo(
       method: PaymentMethod.cashOnDelivery,
       name: 'Cash on Delivery',
       description: 'Pay when your order is delivered',
@@ -77,7 +77,7 @@ class PaymentMethod_Info {
     ),
   ];
 
-  static PaymentMethod_Info getMethodInfo(PaymentMethod method) {
+  static PaymentMethodInfo getMethodInfo(PaymentMethod method) {
     return availableMethods.firstWhere((info) => info.method == method);
   }
 }
